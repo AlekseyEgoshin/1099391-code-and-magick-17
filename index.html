@@ -181,6 +181,33 @@
   </div>
 </template>
 
+<script>
+    function getWizardHeight(wizardWidth){
+        return (1.337 * wizardWidth);
+    }
+
+    function getFireballSpeed(left) {
+        if (left){
+            return 5;
+        }
+        return 2;
+    }
+
+    function getWizardX(width) {
+        return width/2;
+    }
+
+    function getWizardY(height) {
+        return height/3;
+    }
+
+    // Переменные
+    var fireballSize = 22; // Размер фаербола в пикселях
+    var wizardSpeed = 3;
+    var wizardWidth = 70;
+
+
+</script>
 <script src="js/game.js"></script>
 
 </body>
