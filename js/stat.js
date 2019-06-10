@@ -49,7 +49,7 @@ window.renderStatistics = function(ctx, names, times) {
 
         // Вывод имени игрока
         ctx.fillText(names[i], CLOUD_POS_X + GAP * 2 + FONT_GAP + (GAP + DIAGRAMM_SPACE_BETWEEN + DIAGRAMM_WIDTH) * i, WINDOW_HEIGHT - CLOUD_POS_Y - GAP);
-        
+
         // Отрисовка диаграммы
         ctx.fillStyle = "rgba(0, 0," + (BLUE_COLOR - FONT_GAP * i * 5) + ", " + (1 - i/10) + ")";
         if (names[i] === 'Вы') {
