@@ -40,16 +40,16 @@ window.renderStatistics = function (ctx, names, times) {
 
   for (var i = 0; i < names.length; i++) {
     if (names[i] === CURRENT_PLAYER_NAME && i !== 0) {
-        // После прохождения условия меняем местами элементы в массиве имен, потом в массиве времени
-        var temp = names[i];
-        names[i] = names[0];
-        names[0] = temp;
+      // После прохождения условия меняем местами элементы в массиве имен, потом в массиве времени
+      var temp = names[i];
+      names[i] = names[0];
+      names[0] = temp;
 
-        //
-        temp = times[i];
-        times[i] = times[0];
-        times[0] = temp;
-        break;
+      //
+      temp = times[i];
+      times[i] = times[0];
+      times[0] = temp;
+      break;
     }
   }
 
@@ -65,7 +65,7 @@ window.renderStatistics = function (ctx, names, times) {
     ctx.fillText(names[i], CLOUD_POS_X + GAP * 2 + FONT_GAP + (GAP + DIAGRAMM_SPACE_BETWEEN + DIAGRAMM_WIDTH) * i, WINDOW_HEIGHT - CLOUD_POS_Y - GAP);
 
     // Отрисовка диаграммы
-    ctx.fillStyle = 'rgba(0, 0,' + Math.round(Math.random() * 255) + ')';
+    ctx.fillStyle = 'rgba(0, 0,' + Math.round(Math.random() * BLUE_COLOR) + ')';
     if (names[i] === CURRENT_PLAYER_NAME) {
       ctx.fillStyle = CURRENT_PLAYER_COLOR;
     }
