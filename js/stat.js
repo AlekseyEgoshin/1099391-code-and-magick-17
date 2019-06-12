@@ -45,7 +45,6 @@ window.renderStatistics = function (ctx, names, times) {
       names[i] = names[0];
       names[0] = temp;
 
-      //
       temp = times[i];
       times[i] = times[0];
       times[0] = temp;
