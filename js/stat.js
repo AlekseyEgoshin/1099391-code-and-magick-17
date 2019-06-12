@@ -16,6 +16,7 @@ var DIAGRAMM_WIDTH = 40;
 var DIAGRAMM_SPACE_BETWEEN = 50;
 var FONT_GAP = 15;
 var GAP = 10;
+var CURRENT_PLAYER_NAME = 'Вы';
 var CURRENT_PLAYER_COLOR = 'rgba(255, 0, 0, 1)';
 
 function renderCloud(ctx, x, y, color) {
@@ -33,26 +34,39 @@ function getMaxElement(arr) {
   return maxElement;
 }
 
+
 window.renderStatistics = function (ctx, names, times) {
+  var maxTime = getMaxElement(times);
+
+  for (var i = 0; i < names.length; i++) {
+    if (names[i] === CURRENT_PLAYER_NAME && i !== 0) {
+        // После прохождения условия меняем местами элементы в массиве имен, потом в массиве времени
+        var temp = names[i];
+        names[i] = names[0];
+        names[0] = temp;
+
+        //
+        temp = times[i];
+        times[i] = times[0];
+        times[0] = temp;
+        break;
+    }
+  }
 
   renderCloud(ctx, CLOUD_POS_X + GAP, CLOUD_POS_Y + GAP, COLOR_SHADOW_CLOUD);
   renderCloud(ctx, CLOUD_POS_X, CLOUD_POS_Y, COLOR_MAIN_CLOUD);
 
-  var maxTime = getMaxElement(times);
-
   ctx.fillStyle = DEFAULT_COLOR;
-  ctx.font = '16px PT Mono black';
+  ctx.font = '16px PT Mono';
   ctx.fillText('Ура, вы победили!', WINDOW_WIDTH / 2, 30);
   ctx.fillText('Список результатов:', WINDOW_WIDTH / 2, 50);
 
-  for (var i = 0; i < names.length; i++) {
-
-    // Вывод имени игрока
+  for (i = 0; i < names.length; i++) {
     ctx.fillText(names[i], CLOUD_POS_X + GAP * 2 + FONT_GAP + (GAP + DIAGRAMM_SPACE_BETWEEN + DIAGRAMM_WIDTH) * i, WINDOW_HEIGHT - CLOUD_POS_Y - GAP);
 
     // Отрисовка диаграммы
-    ctx.fillStyle = 'rgba(0, 0,' + (BLUE_COLOR - FONT_GAP * i * 5) + ', ' + (1 - i / 10) + ')';
-    if (names[i] === 'Вы') {
+    ctx.fillStyle = 'rgba(0, 0,' + Math.round(Math.random() * 255) + ')';
+    if (names[i] === CURRENT_PLAYER_NAME) {
       ctx.fillStyle = CURRENT_PLAYER_COLOR;
     }
     ctx.fillRect(CLOUD_POS_X + GAP * 2 + FONT_GAP + (GAP + DIAGRAMM_SPACE_BETWEEN + DIAGRAMM_WIDTH) * i, WINDOW_HEIGHT - CLOUD_POS_Y - GAP - FONT_GAP, DIAGRAMM_WIDTH, -(DIAGRAMM_HEIGHT * times[i]) / maxTime);
