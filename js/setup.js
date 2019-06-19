@@ -39,20 +39,24 @@ function renderWizard(wizard) {
   return wizardElement;
 }
 
+function getDomElemets() {
+  // Получаем массив объектов с информацией по магам
+  var wizards = getSimilarPerson(FIRST_NAMES, SECOND_NAMES, COAT_COLORS, EYES_COLORS);
+  var fragment = document.createDocumentFragment();
+
+  for (var i = 0; i < QUANTITY_OF_PERSONS; i++) {
+      fragment.appendChild(renderWizard(wizards[i]));
+  }
+
+  return fragment;
+}
+
 var userDialog = document.querySelector('.setup');
 userDialog.classList.remove('hidden');
 
 var similarListElement = userDialog.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 
-// Получаем массив объектов с информацией по магам
-var wizards = getSimilarPerson(FIRST_NAMES, SECOND_NAMES, COAT_COLORS, EYES_COLORS);
-var fragment = document.createDocumentFragment();
-
-for (var i = 0; i < QUANTITY_OF_PERSONS; i++) {
-  fragment.appendChild(renderWizard(wizards[i]));
-}
-
-similarListElement.appendChild(fragment);
+similarListElement.appendChild(getDomElemets());
 
 userDialog.querySelector('.setup-similar').classList.remove('hidden');
