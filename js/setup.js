@@ -45,7 +45,7 @@ function getDomElemets() {
   var fragment = document.createDocumentFragment();
 
   for (var i = 0; i < QUANTITY_OF_PERSONS; i++) {
-      fragment.appendChild(renderWizard(wizards[i]));
+    fragment.appendChild(renderWizard(wizards[i]));
   }
 
   return fragment;
