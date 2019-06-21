@@ -83,27 +83,38 @@ function onPopupEscPress(evt) {
   }
 }
 
+function onChangeColors(element, colors) {
+  element.style.fill = colors[getIndex(colors.length)];
+}
+
+function onChangeValue(element, colors) {
+  element.style.background = colors[getIndex(colors.length)];
+  element.querySelector('input').value = colors[getIndex(colors.length)];
+}
+
 function openPopup(){
   Settings.classList.remove('hidden');
   document.addEventListener('keydown', onPopupEscPress);
 
   coatColor.addEventListener('click', function () {
-    coatColor.style.fill = COAT_COLORS[getIndex(COAT_COLORS.length)];
+    onChangeColors(coatColor, COAT_COLORS);
   })
 
   eyesColor.addEventListener('click', function () {
-    eyesColor.style.fill = EYES_COLORS[getIndex(EYES_COLORS.length)];
+    onChangeColors(eyesColor, EYES_COLORS);
   })
 
   fireballColor.addEventListener('click', function () {
-    fireballColor.style.background = FIREBALL_COLORS[getIndex(FIREBALL_COLORS.length)];
-    fireballColor.querySelector('input').value = FIREBALL_COLORS[getIndex(FIREBALL_COLORS.length)];
+    onChangeValue(fireballColor, FIREBALL_COLORS);
   })
 };
 
 function closePopup() {
   Settings.classList.add('hidden');
   document.removeEventListener('keydown', onPopupEscPress);
+  coatColor.removeEventListener('click', onChangeColors);
+  eyesColor.removeEventListener('click', onChangeColors);
+  fireballColor.removeEventListener('click', onChangeValue);
 };
 
 openSettings.addEventListener('click', function () {
