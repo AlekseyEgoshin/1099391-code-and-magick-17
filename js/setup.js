@@ -33,7 +33,7 @@ function getSimilarPerson(names, secondNames, coatColors, eyesColors) {
 
 // Функция для отрисовки мага
 function renderWizard(wizard) {
-  var wizardElement = similarWizardTemplate.cloneNode(true);
+  var wizardElement = similarWizardItem.cloneNode(true);
 
   wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyesColor;
   wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
@@ -54,19 +54,19 @@ function getDomElemets() {
   return fragment;
 }
 
-var Settings = document.querySelector('.setup');
+var settings = document.querySelector('.setup');
 
-var similarListElement = Settings.querySelector('.setup-similar-list');
-var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
+var similarListElement = settings.querySelector('.setup-similar-list');
+var similarWizardItem = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 
 similarListElement.appendChild(getDomElemets());
 
-Settings.querySelector('.setup-similar').classList.remove('hidden');
+settings.querySelector('.setup-similar').classList.remove('hidden');
 
 
 // Модуль 4, задание 1
 var openSettings = document.querySelector('.setup-open');
-var closeSettings = Settings.querySelector('.setup-close');
+var closeSettings = settings.querySelector('.setup-close');
 var userIcon = document.querySelector('.setup-open-icon');
 userIcon.tabIndex = '0';
 closeSettings.tabIndex = '0';
@@ -78,7 +78,7 @@ var saveButton = document.querySelector('.setup-submit');
 
 // Блок для открытия/закрытия поп-апа
 function onPopupEscPress(evt) {
-  if (evt.keyCode === ESC_KEY && !this.querySelector('.setup-user-name:focus')) {
+  if (evt.keyCode === ESC_KEY && !evt.currentTarget.querySelector('.setup-user-name:focus')) {
     closePopup();
   }
 }
@@ -92,30 +92,30 @@ function onChangeValue(element, colors) {
   element.querySelector('input').value = colors[getIndex(colors.length)];
 }
 
-function openPopup(){
-  Settings.classList.remove('hidden');
+function openPopup() {
+  settings.classList.remove('hidden');
   document.addEventListener('keydown', onPopupEscPress);
 
   coatColor.addEventListener('click', function () {
     onChangeColors(coatColor, COAT_COLORS);
-  })
+  });
 
   eyesColor.addEventListener('click', function () {
     onChangeColors(eyesColor, EYES_COLORS);
-  })
+  });
 
   fireballColor.addEventListener('click', function () {
     onChangeValue(fireballColor, FIREBALL_COLORS);
-  })
-};
+  });
+}
 
 function closePopup() {
-  Settings.classList.add('hidden');
+  settings.classList.add('hidden');
   document.removeEventListener('keydown', onPopupEscPress);
   coatColor.removeEventListener('click', onChangeColors);
   eyesColor.removeEventListener('click', onChangeColors);
   fireballColor.removeEventListener('click', onChangeValue);
-};
+}
 
 openSettings.addEventListener('click', function () {
   openPopup();
@@ -127,12 +127,19 @@ userIcon.addEventListener('keydown', function (evt) {
   }
 });
 
-closeSettings.addEventListener('click', function () {
-  closePopup()
-});
+closeSettings.addEventListener('click', closePopup);
 
 closeSettings.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_KEY) {
-    closePopup()
+    closePopup();
+  }
+});
+
+saveButton.addEventListener('click', closePopup());
+
+saveButton.addEventListener('click', function (evt) {
+  evt.preventDefault();
+  if (evt.keyCode === ENTER_KEY) {
+    closePopup();
   }
 });
