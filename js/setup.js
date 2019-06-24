@@ -63,7 +63,6 @@ similarListElement.appendChild(getDomElemets());
 
 settings.querySelector('.setup-similar').classList.remove('hidden');
 
-
 // Модуль 4, задание 1
 var openSettings = document.querySelector('.setup-open');
 var closeSettings = settings.querySelector('.setup-close');
