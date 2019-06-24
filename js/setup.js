@@ -117,9 +117,7 @@ function closePopup() {
   fireballColor.removeEventListener('click', onChangeValue);
 }
 
-openSettings.addEventListener('click', function () {
-  openPopup();
-});
+openSettings.addEventListener('click', openPopup);
 
 userIcon.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_KEY) {
@@ -135,7 +133,7 @@ closeSettings.addEventListener('keydown', function (evt) {
   }
 });
 
-saveButton.addEventListener('click', closePopup());
+saveButton.addEventListener('click', closePopup);
 
 saveButton.addEventListener('click', function (evt) {
   evt.preventDefault();
